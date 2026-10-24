@@ -1,0 +1,11 @@
+{
+  "name": "devflow-skills",
+  "owner": { "name": "Thenn Labs" },
+  "plugins": [
+    {
+      "name": "devflow",
+      "source": "./",
+      "description": "Workflow rules, client message handling, and QA + security testing skills."
+    }
+  ]
+}

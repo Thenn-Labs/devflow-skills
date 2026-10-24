@@ -1,0 +1,10 @@
+{
+  "name": "devflow",
+  "version": "1.0.0",
+  "description": "Workflow rules for Claude Code: safe git branching, ask-don't-assume, change logging, multi-agent coordination, client message handling, and full QA + security testing.",
+  "author": { "name": "Thenn Labs" },
+  "homepage": "https://github.com/Thenn-Labs/devflow-skills",
+  "repository": "https://github.com/Thenn-Labs/devflow-skills",
+  "license": "MIT",
+  "keywords": ["workflow", "git", "multi-agent", "testing", "security", "qa"]
+}
