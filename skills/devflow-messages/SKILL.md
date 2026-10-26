@@ -27,7 +27,7 @@ Also note:
 
 ## Step 2: Ask before building
 
-Show the user the list. Ask every ❓ question in one go. You can ask as many as you need. Start the clear items while you wait only if they don't depend on the answers. Never guess what the client meant.
+Show the user the list. Ask every ❓ question in one go (in harness mode, `DEVFLOW_HARNESS=1`, ask through the harness `ask_question` tool and draft the client reply for the owner; never send it to the client). You can ask as many as you need. Start the clear items while you wait only if they don't depend on the answers. Never guess what the client meant.
 
 ## Step 3: Make the changes
 

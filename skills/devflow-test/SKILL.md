@@ -11,6 +11,8 @@ The security part follows the method in [SECURITY.md](SECURITY.md), which is ada
 
 ## Step 0: Scope and safety (ask if unclear)
 
+In harness mode (`DEVFLOW_HARNESS=1`) there is no person at the prompt: ask through the harness `ask_question` tool, and test in the browser or with a code audit, since nobody can connect a phone.
+
 Confirm with the user before testing:
 - **What** to test: the whole app, or specific features, pages or endpoints.
 - **Where:** local, staging, or production.

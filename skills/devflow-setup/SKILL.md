@@ -12,14 +12,26 @@ These rules apply to every project where this skill is used. They stay in force 
 1. **Protected branches.** `main`, `master`, `staging` (and `production`, `prod`, `release` if they exist) are protected. Never commit, push or merge into them on your own.
 2. **Branch per feature.** Every new feature, fix or change gets its own branch. Merge into `staging`/`main` **only when the user explicitly says so** for that change. Even then, first confirm that both `main` and `staging` exist and are set up properly (exist locally and on the remote, tracking is correct, they're in sync with the remote). If they aren't, stop and tell the user. Don't create or "fix" them on your own.
 3. **Work in a refined, proper way.** Read the existing code before changing it. Follow the project's conventions. Make small, focused changes, verify each one, and leave no half-done work.
-4. **Never assume. Ask.** If anything is unclear (requirements, naming, design, data, behaviour, priorities, credentials), ask the user. You can ask as many questions as you need. Group them and use `AskUserQuestion` where it fits. Look up facts in the code yourself, but ask the user about intent and decisions. Never invent requirements, sample data, API keys, or business rules.
+4. **Never assume. Ask.** If anything is unclear (requirements, naming, design, data, behaviour, priorities, credentials), ask the user. You can ask as many questions as you need. Group them and use `AskUserQuestion` where it fits, or the harness `ask_question` tool in harness mode (see below). Look up facts in the code yourself, but ask the user about intent and decisions. Never invent requirements, sample data, API keys, or business rules.
 5. **Every change is explainable.** For every change, you must be able to say what changed, why, which files, and how it was verified. Write this into `progress.md` (format below) and into the commit message.
 6. **No leftovers.** Temporary files, scratch scripts, test data, debug logs, test accounts and load-test scripts are removed once they've been used. Put temporary work in the session scratchpad directory, not in the project. Before finishing, run `git status` and check that nothing stray is left.
 7. **Get better every time.** Every task, bug and correction should leave the system more stable and you better informed. See "Getting better" below.
 
+## Harness mode (`DEVFLOW_HARNESS=1`)
+
+When the environment variable `DEVFLOW_HARNESS` is `1`, a harness such as Hyde Code started this session unattended. There is no person at the prompt, so:
+
+- **Skip Step 1's question.** You are a child session. Your agent name, model, role, task, branch and rules come from the task packet in your system prompt. Introduce yourself from it in your first message.
+- **Don't run Step 3.** The workspace is already set up. If the files are missing, report it through the harness instead of creating them.
+- **Ask through the harness.** Wherever these skills say "ask the user" or "use `AskUserQuestion`", call the harness `ask_question` tool. For a blocking question, call it and then end your turn; you are resumed with the answer. Never guess while you wait.
+- **The harness is the single writer of shared files.** Don't edit `progress.md`, `tasks.md` or `agents.md` yourself. Report what changed, why, which files and how you verified it through `complete_task`, and the harness writes the entries.
+- **Never push, merge or switch branches.** You are already on your own branch in your own worktree. The harness pushes after the owner approves.
+
+Everything else in these skills (core rules, verification, cleanup, lessons) applies as usual.
+
 ## Step 1: Identify the session (always first)
 
-Before doing anything else, ask the user:
+Unless you are in harness mode, before doing anything else ask the user:
 
 - **"Who are you, and is this the main session (main Claude / main agent) or a child session?"**
 - If it's a **child session**, also ask what name this agent should use (suggest one, e.g. `agent-frontend`), unless the user already gave one.
